@@ -193,7 +193,7 @@ export default function AppBuilder() {
 
   const restoreVersion = async (version: AppContentVersion) => {
     try {
-      const sectionsData = version.sections_data as AppContentSection[]
+      const sectionsData = version.sections_data as unknown as AppContentSection[]
       // Delete existing sections and re-insert from version
       for (const sec of sectionsData) {
         const { error } = await supabase.from('app_content_sections')

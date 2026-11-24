@@ -100,7 +100,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const { data, error } = await supabase.auth.mfa.enroll({ factorType: 'totp' })
       if (error) return { error: error.message }
-      return { qrUrl: data.totpqr_url, secret: data.totp.secret }
+      return { qrUrl: data.totp.qr_code, secret: data.totp.secret }
     } catch (err) {
       return { error: err instanceof Error ? err.message : 'MFA enrollment failed.' }
     }

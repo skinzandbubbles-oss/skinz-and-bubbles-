@@ -60,7 +60,9 @@ export interface AppContentVersion {
   scheduled_for: string | null
   published_by: string | null
   sections: AppContentSection[]
+  sections_data: Record<string, unknown>[]
   settings: AppSettings | null
+  settings_data: Record<string, unknown> | null
   created_at: string
 }
 
@@ -110,6 +112,7 @@ export interface EventRecord {
   end_date: string
   location: string
   is_published: boolean
+  status: string
   banner_image_url: string | null
   created_at: string
 }

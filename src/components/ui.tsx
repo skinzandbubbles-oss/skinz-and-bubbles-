@@ -8,7 +8,7 @@ export function DataTable<T>({
 }: {
   columns: { key: string; label: string; className?: string }[]
   rows: T[]
-  renderRow: (row: T) => ReactNode
+  renderRow: (row: T, index: number) => ReactNode
   emptyMessage?: string
 }) {
   return (
@@ -34,7 +34,7 @@ export function DataTable<T>({
               </td>
             </tr>
           ) : (
-            rows.map((row, i) => renderRow(row))
+            rows.map((row, i) => renderRow(row, i))
           )}
         </tbody>
       </table>
