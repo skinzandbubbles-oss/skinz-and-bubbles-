@@ -4,6 +4,10 @@
     "bootstrap-super-admin": {
       "hasChanged": false,
       "hash": "1dba058e308aaf50e6e253fd655f3417360afff382db22efb4b6d7553d0a91bd"
+    },
+    "accept-invite": {
+      "hasChanged": false,
+      "hash": "5020284ae5a3653a7da978168c92e7e0cf8e96e8884e789be852e40872a401f1"
     }
   }
 }

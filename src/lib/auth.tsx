@@ -113,12 +113,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const totpFactor = factors?.totp?.[0]
       if (!totpFactor) return { error: 'No MFA factor found.' }
 
-      const { error: challengeError } = await supabase.auth.mfa.challenge({ factorId: totpFactor.id })
+      const { data: challengeData, error: challengeError } = await supabase.auth.mfa.challenge({ factorId: totpFactor.id })
       if (challengeError) return { error: challengeError.message }
 
       const { error: verifyError } = await supabase.auth.mfa.verify({
         factorId: totpFactor.id,
-        challengeId: totpFactor.id,
+        challengeId: challengeData.id,
         code,
       })
       if (verifyError) return { error: verifyError.message }

@@ -1,8 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { Lock, Mail, User, Eye, EyeOff } from 'lucide-react'
+import { Lock, Mail, User, Eye, EyeOff, Loader2, CheckCircle } from 'lucide-react'
 import { supabase } from '../lib/supabase'
-import { logAction } from '../lib/audit'
 
 export default function AcceptInvitePage() {
   const { token } = useParams<{ token: string }>()
@@ -17,10 +16,11 @@ export default function AcceptInvitePage() {
   const [inviteEmail, setInviteEmail] = useState('')
   const [inviteRole, setInviteRole] = useState('')
   const [valid, setValid] = useState(false)
+  const [success, setSuccess] = useState(false)
 
-  useState(() => {
+  useEffect(() => {
     verifyInvite()
-  })
+  }, [])
 
   async function verifyInvite() {
     const { data, error } = await supabase
@@ -69,30 +69,26 @@ export default function AcceptInvitePage() {
     }
     setLoading(true)
     try {
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email: inviteEmail,
-        password,
-        options: { data: { full_name: fullName, is_admin: true } },
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/accept-invite`
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        },
+        body: JSON.stringify({ token, password, full_name: fullName }),
       })
-      if (authError) throw authError
 
-      const userId = authData.user?.id
-      if (userId) {
-        await supabase.from('admin_accounts').insert({
-          id: userId,
-          email: inviteEmail,
-          full_name: fullName,
-          role: inviteRole,
-          status: 'active',
-        })
-        await supabase.from('admin_invites')
-          .update({ accepted_at: new Date().toISOString() })
-          .eq('token', token)
-        await logAction('invite.accepted', 'invite', token)
+      const data = await response.json()
+
+      if (!response.ok) {
+        setError(data.error || 'Failed to create admin account.')
+        return
       }
-      navigate('/admin/login')
+
+      setSuccess(true)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create account.')
+      setError(err instanceof Error ? err.message : 'Failed to connect to the server.')
     } finally {
       setLoading(false)
     }
@@ -101,7 +97,29 @@ export default function AcceptInvitePage() {
   if (verifying) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-brand-pink-200 border-t-brand-pink-600" />
+        <Loader2 className="w-8 h-8 animate-spin text-brand-pink-600" />
+      </div>
+    )
+  }
+
+  if (success) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-brand-pink-50 via-slate-50 to-brand-aqua-50 p-4">
+        <div className="w-full max-w-md">
+          <div className="flex flex-col items-center mb-8">
+            <img src="/assets/logo.png" alt="Bubbles" className="w-16 h-16 rounded-2xl mb-4" />
+            <h1 className="font-display font-bold text-2xl text-slate-900">Account Created</h1>
+          </div>
+          <div className="card p-6 text-center">
+            <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
+            <p className="text-sm text-slate-600 mb-4">
+              Your administrator account has been created successfully. You can now sign in with your email and password.
+            </p>
+            <button onClick={() => navigate('/admin/login')} className="btn-primary w-full">
+              Go to Login
+            </button>
+          </div>
+        </div>
       </div>
     )
   }
@@ -131,6 +149,7 @@ export default function AcceptInvitePage() {
                       value={fullName}
                       onChange={e => setFullName(e.target.value)}
                       required
+                      autoFocus
                       className="input pl-10"
                       placeholder="Jane Doe"
                     />
