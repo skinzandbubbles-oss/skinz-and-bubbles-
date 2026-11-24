@@ -75,7 +75,8 @@ export default function App() {
         <Route path="settings" element={<AppSettingsPage />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/admin/login" replace />} />
+      <Route path="/" element={<Navigate to="/legacy.html" replace />} />
+      <Route path="*" element={<Navigate to="/legacy.html" replace />} />
     </Routes>
   )
 }
