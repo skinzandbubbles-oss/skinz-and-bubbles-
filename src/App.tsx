@@ -38,9 +38,14 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   return <>{children}</>
 }
 
-function LegacyRedirect() {
-  window.location.replace('/legacy.html')
-  return null
+function LegacyPage() {
+  return (
+    <iframe
+      src="/legacy.html"
+      title="Skinz & Bubbles"
+      style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', border: 'none' }}
+    />
+  )
 }
 
 export default function App() {
@@ -80,8 +85,8 @@ export default function App() {
         <Route path="settings" element={<AppSettingsPage />} />
       </Route>
 
-      <Route path="/" element={<LegacyRedirect />} />
-      <Route path="*" element={<LegacyRedirect />} />
+      <Route path="/" element={<LegacyPage />} />
+      <Route path="*" element={<LegacyPage />} />
     </Routes>
   )
 }
