@@ -1,0 +1,46 @@
+
+/* Bright tropical color without returning to the crowded interface */
+:root{--pink:#f22291!important;--aqua:#02cddd!important;--yellow:#ffe451!important;--navy:#084967!important;--ink:#123f52!important;--muted:#48768b!important}
+html,body{background:#b8f1f5!important;color:#123d52!important}
+.shell{background:linear-gradient(180deg,#c8faff 0%,#f0fdff 38%,#ffffff 82%)!important;box-shadow:0 4px 30px #0676a328!important}
+.top{background:linear-gradient(100deg,#00b5db 0%,#20d9e7 57%,#a3f4eb 100%)!important;border-bottom:3px solid #ffdf4d!important;box-shadow:0 4px 15px #007f9b20!important;min-height:83px!important}
+.top img{width:135px!important;max-width:39vw!important;max-height:64px!important;filter:drop-shadow(0 2px 3px #003e5750)!important}
+.chip.my-account-top{background:#ffffff!important;border:1.5px solid #ffffff!important;color:#074e70!important;font-weight:800!important;box-shadow:0 3px 9px #037d9b24!important}
+.main{position:relative!important;isolation:isolate;background:transparent!important;color:#103d54!important;overflow:hidden!important}
+/* Watermark is decorative and never intercepts taps, form controls, or links. */
+.main::before{content:"";pointer-events:none;position:absolute;z-index:0;top:205px;left:50%;transform:translateX(-50%);width:min(94%,560px);height:540px;background-image:var(--brand-watermark);background-size:contain;background-position:center top;background-repeat:no-repeat;opacity:.105!important}
+.main>*{position:relative;z-index:1}
+.main h1,.main h2{color:#073b59!important}
+.main .sub,.main p{color:#285b70}
+.main .eyebrow,.minimal-kicker{color:#007da7!important}
+.minimal-intro{padding-bottom:15px!important}
+.minimal-intro h1{color:#074968!important}
+.minimal-intro p{color:#31697e!important}
+.minimal-hero{border:2px solid #a5eef2!important;background:#fff!important;box-shadow:0 7px 24px #028fa51c!important}
+.minimal-hero-caption{background:linear-gradient(90deg,#efffff,#fff9dc)!important;border-top:2px solid #b5eff1!important}
+.minimal-hero-caption strong{color:#084662!important}
+.minimal-arrow{color:#ef228f!important}
+.minimal-cta{background:linear-gradient(105deg,#f32594,#ff4aa3)!important;color:#fff!important;box-shadow:0 7px 17px #f325942d!important;font-size:17px!important}
+.minimal-secondary{color:#007da0!important}
+.minimal-link{background:linear-gradient(140deg,#e7fcff 0%,#ffffff 95%)!important;border:1.5px solid #9de8ed!important;box-shadow:0 3px 12px #03a3be12!important}
+.minimal-link:nth-child(2),.minimal-link:nth-child(3){background:linear-gradient(140deg,#fffde6 0%,#ffffff 95%)!important;border-color:#ffe489!important}
+.minimal-link strong{color:#073b58!important}
+.minimal-section-heading button{color:#ed198b!important}
+.panel,.card,.info-section{background:#ffffffeb!important;border:1px solid #a4e3eb!important;color:#17455a!important}
+.card.pink{background:linear-gradient(145deg,#ffe5f3,#ffffff)!important;border-color:#ffb2d7!important}
+.card.yellow{background:linear-gradient(145deg,#fff4b9,#ffffff)!important;border-color:#ffdf64!important}
+.card.dark{background:#076f98!important;color:#fff!important}
+.card.dark p,.card.dark h3{color:#fff!important}
+.btn{font-size:15px!important}
+.btn:not(.aqua):not(.yellow):not(.ghost){background:#f22291!important;color:white!important}
+.btn.aqua{background:#00d3e4!important;color:#063e56!important}
+.btn.yellow{background:#ffe451!important;color:#063e56!important}
+.tabs{background:#fff!important;border-top:2px solid #c1eef2!important;box-shadow:0 -5px 19px #047e971c!important}
+.tab{color:#4d7b90!important}
+.tab.on{color:#e9208a!important;background:#ffe7f4!important}
+.tab.on strong{color:#e9208a!important}
+.notice{background:#fff9d6!important;border-left-color:#f6bc13!important;color:#3b5361!important}
+.form label{color:#123e53!important}
+.form input,.form textarea,.form select{background:#fff!important;border-color:#82ccd8!important;color:#133d52!important}
+@media(max-width:420px){.top img{width:116px!important}.main::before{top:215px;height:470px;width:93%}.minimal-link{min-height:100px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}

@@ -1,0 +1,29 @@
+
+/* Transparent brand watermark: soft continuous motion, behind the content. */
+.main::before {
+  opacity: .12!important;
+  animation: bubbles-watermark-float 9s ease-in-out infinite!important;
+  transform-origin:center center;
+  will-change:transform,opacity;
+  background-color:transparent!important;
+  pointer-events:none!important;
+}
+@keyframes bubbles-watermark-float {
+  0%,100% {transform:translate3d(-50%,0,0) scale(1);opacity:.10}
+  50% {transform:translate3d(-50%,-17px,0) scale(1.025);opacity:.145}
+}
+.notification-bell {
+  position:relative;display:grid;place-items:center;width:46px;height:46px;
+  flex-shrink:0;border:1px solid #abf1f6;background:rgba(255,255,255,.88);
+  color:#074e70;border-radius:50%;box-shadow:0 3px 10px #016a8325;
+  cursor:pointer;touch-action:manipulation;
+}
+.notification-bell:hover {background:#fff}
+.notification-bell:focus-visible {outline:3px solid #ffdf4d;outline-offset:3px}
+.notification-dot {position:absolute;right:9px;top:8px;width:8px;height:8px;border-radius:50%;background:#f22291;border:1.5px solid #fff}
+.top{gap:10px!important}
+.top .row {min-width:0;flex-wrap:nowrap!important}
+.top .row img {max-width:43vw!important}
+.topright {flex-shrink:0}
+@media (max-width:420px) {.top .tiny{font-size:10px!important;letter-spacing:.2px!important}.top .row img{width:104px!important;max-width:36vw!important}.notification-bell{width:43px;height:43px}}
+@media (prefers-reduced-motion:reduce) {.main::before{animation:none!important;opacity:.11!important;transform:translateX(-50%)!important}}

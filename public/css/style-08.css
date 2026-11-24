@@ -1,0 +1,41 @@
+
+/* Mobile-first visual audit: consistent page widths, readable labels, no wallpaper over functional content. */
+html, body {max-width:100%;overflow-x:hidden}
+.shell,.main,#app,.panel,.guest-panel,.account-clean-page,.settings-shell {min-width:0}
+.main {overflow-x:clip;overscroll-behavior-x:none}
+.main > *, #app > * {max-width:100%;min-width:0}
+.main::before {opacity:.025!important;animation:none!important;filter:none!important}
+.main:has(.glam-hero)::before {opacity:.065!important}
+.account-clean-page{position:relative;z-index:1;max-width:620px;margin:0 auto;padding:8px 0 36px;color:#123c54}
+.account-clean-heading{margin:2px 0 20px;padding:0 2px}
+.account-clean-heading .eyebrow{color:#0c7188;font-size:12px;letter-spacing:1.1px}
+.account-clean-heading h1{font-size:clamp(28px,6vw,36px);line-height:1.18;letter-spacing:-.5px;color:#073b57;margin:0 0 8px;text-shadow:none}
+.account-clean-heading p{color:#496c7e;line-height:1.5;font-size:15px;margin:0}
+.account-clean-identity{display:flex;align-items:center;gap:12px;padding:16px;border-radius:17px;background:#fff;border:1px solid #d0e8eb;margin-bottom:22px}
+.account-clean-avatar{display:grid;place-items:center;width:48px;height:48px;flex-shrink:0;border-radius:14px;background:#e0fbff;font-size:25px}
+.account-clean-identity strong,.account-clean-identity small{display:block;overflow-wrap:anywhere}
+.account-clean-identity strong{font-size:16px;color:#073b57}.account-clean-identity small{font-size:13px;color:#557785;margin-top:4px}
+.account-clean-section{margin:0 0 22px}.account-clean-section h2{font-size:17px;line-height:1.3;color:#123f56;margin:0 0 10px;letter-spacing:0;font-weight:800}
+.account-clean-list{background:#fff;border:1px solid #cce5e9;border-radius:18px;overflow:hidden;box-shadow:0 3px 12px #053c5710}
+.account-clean-link{display:flex;align-items:center;width:100%;gap:13px;text-align:left;min-height:74px;padding:14px 15px;border:0;border-bottom:1px solid #e7f1f3;background:#fff;color:#123d55;cursor:pointer}
+.account-clean-link:last-child{border-bottom:0}.account-clean-link:hover,.account-clean-link:focus-visible{background:#effcff}
+.account-clean-icon{display:grid;place-items:center;flex-shrink:0;width:40px;height:40px;border-radius:12px;background:#eafaff;font-size:20px}
+.account-clean-copy{display:block;min-width:0;flex:1}.account-clean-copy strong{display:block;font-size:15px;line-height:1.25;color:#0d3c55;font-weight:800}
+.account-clean-copy small{display:block;font-size:12px;line-height:1.4;color:#587a8b;margin-top:5px;overflow-wrap:anywhere}
+.account-clean-chevron{font-size:28px;color:#147992;font-weight:400;line-height:1}
+.account-clean-primary .btn{width:100%;min-height:52px;font-size:15px;margin-bottom:20px}
+.account-clean-signout{width:100%;padding:14px;border:1px solid #ebc4d7;border-radius:13px;background:#fff;color:#ab2465;font-weight:800;font-size:15px;cursor:pointer}
+.account-clean-note{font-size:12px!important;color:#537386!important;line-height:1.5;margin:18px 0 5px}
+/* Keep other screens from the same cramped mobile tile layout. */
+@media(max-width:620px){
+ .main{padding-left:16px!important;padding-right:16px!important}
+ .guest-tile-grid,.account-choices {grid-template-columns:minmax(0,1fr)!important;gap:10px!important}
+ .guest-tile,.account-choice {min-height:0!important;padding:15px!important}
+ .cards,.split {grid-template-columns:minmax(0,1fr)!important}
+ .cards .card {min-height:0!important}
+ .actions{flex-wrap:wrap;gap:10px}
+ .actions>.btn {min-width:0;max-width:100%;flex:1 1 150px}
+ .settings-shell,.guest-panel,.amb-page,.panel{max-width:100%;overflow-wrap:anywhere}
+ .head,.amb-intro,.guest-lead{max-width:100%;overflow-wrap:anywhere}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important}}

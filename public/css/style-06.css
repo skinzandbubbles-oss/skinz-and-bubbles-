@@ -1,0 +1,13 @@
+
+/* V21 accidentally used overflow:hidden!important on the scrolling .main.
+   Make the content region the scroll container while preserving fixed navigation. */
+html, body {height:100%!important; overflow:hidden!important; overscroll-behavior:none;}
+.shell {height:100vh!important; height:100svh!important; min-height:0!important; display:flex!important; flex-direction:column!important; overflow:hidden!important;}
+.top {flex:0 0 auto!important;}
+.main {flex:1 1 0%!important; min-height:0!important; max-height:none!important;
+  overflow-x:hidden!important;overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch!important; touch-action:pan-y!important;
+  overscroll-behavior-y:contain!important;
+  padding-bottom:calc(125px + env(safe-area-inset-bottom))!important;}
+.tabs {flex-shrink:0!important;}
+@media(min-width:720px){.shell{height:calc(100svh - 20px)!important;}}
