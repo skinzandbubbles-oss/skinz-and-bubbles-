@@ -38,6 +38,11 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   return <>{children}</>
 }
 
+function LegacyRedirect() {
+  window.location.replace('/legacy.html')
+  return null
+}
+
 export default function App() {
   return (
     <Routes>
@@ -75,8 +80,8 @@ export default function App() {
         <Route path="settings" element={<AppSettingsPage />} />
       </Route>
 
-      <Route path="/" element={<Navigate to="/legacy.html" replace />} />
-      <Route path="*" element={<Navigate to="/legacy.html" replace />} />
+      <Route path="/" element={<LegacyRedirect />} />
+      <Route path="*" element={<LegacyRedirect />} />
     </Routes>
   )
 }
