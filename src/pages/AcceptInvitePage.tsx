@@ -90,7 +90,7 @@ export default function AcceptInvitePage() {
           .eq('token', token)
         await logAction('invite.accepted', 'invite', token)
       }
-      navigate('/login')
+      navigate('/admin/login')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create account.')
     } finally {
@@ -193,7 +193,7 @@ export default function AcceptInvitePage() {
           ) : (
             <div className="text-center py-8">
               <p className="text-red-600 mb-4">{error || 'Invalid invitation.'}</p>
-              <Link to="/login" className="text-brand-pink-600 hover:text-brand-pink-700 text-sm">
+              <Link to="/admin/login" className="text-brand-pink-600 hover:text-brand-pink-700 text-sm">
                 Back to login
               </Link>
             </div>

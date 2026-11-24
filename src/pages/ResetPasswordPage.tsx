@@ -14,7 +14,7 @@ export default function ResetPasswordPage() {
     setError('')
     setLoading(true)
     const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
+      redirectTo: `${window.location.origin}/admin/forgot-password`,
     })
     setLoading(false)
     if (resetError) {
@@ -38,7 +38,7 @@ export default function ResetPasswordPage() {
               <div className="rounded-lg bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-700 mb-4">
                 If an account exists for {email}, a password reset email has been sent. Check your inbox and spam folder.
               </div>
-              <Link to="/login" className="text-brand-pink-600 hover:text-brand-pink-700 text-sm">
+              <Link to="/admin/login" className="text-brand-pink-600 hover:text-brand-pink-700 text-sm">
                 Back to login
               </Link>
             </div>
@@ -67,7 +67,7 @@ export default function ResetPasswordPage() {
                 {loading ? 'Sending...' : 'Send Reset Email'}
               </button>
               <div className="text-center">
-                <Link to="/login" className="text-sm text-brand-pink-600 hover:text-brand-pink-700">
+                <Link to="/admin/login" className="text-sm text-brand-pink-600 hover:text-brand-pink-700">
                   Back to login
                 </Link>
               </div>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { Lock, Mail, Eye, EyeOff } from 'lucide-react'
+import { Lock, Mail, Eye, EyeOff, ShieldCheck, KeyRound } from 'lucide-react'
 import { useAuth } from '../lib/auth'
 import { logAction } from '../lib/audit'
 
@@ -23,7 +23,7 @@ export default function LoginPage() {
       setLoading(false)
     } else {
       await logAction('auth.signin', 'admin')
-      navigate('/')
+      navigate('/admin/dashboard')
     }
   }
 
@@ -90,7 +90,7 @@ export default function LoginPage() {
           </form>
 
           <div className="mt-4 text-center">
-            <Link to="/reset-password" className="text-sm text-brand-pink-600 hover:text-brand-pink-700">
+            <Link to="/admin/forgot-password" className="text-sm text-brand-pink-600 hover:text-brand-pink-700">
               Forgot password?
             </Link>
           </div>

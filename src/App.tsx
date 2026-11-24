@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './lib/auth'
+import AdminSetupPage from './pages/AdminSetupPage'
 import LoginPage from './pages/LoginPage'
 import AcceptInvitePage from './pages/AcceptInvitePage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
@@ -33,25 +34,27 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
       </div>
     )
   }
-  if (!admin) return <Navigate to="/login" replace />
+  if (!admin) return <Navigate to="/admin/login" replace />
   return <>{children}</>
 }
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/invite/:token" element={<AcceptInvitePage />} />
-      <Route path="/reset-password" element={<ResetPasswordPage />} />
+      <Route path="/admin/setup" element={<AdminSetupPage />} />
+      <Route path="/admin/login" element={<LoginPage />} />
+      <Route path="/admin/invite/:token" element={<AcceptInvitePage />} />
+      <Route path="/admin/forgot-password" element={<ResetPasswordPage />} />
+
       <Route
-        path="/*"
+        path="/admin/*"
         element={
           <ProtectedRoute>
             <DashboardLayout />
           </ProtectedRoute>
         }
       >
-        <Route index element={<DashboardOverview />} />
+        <Route path="dashboard" element={<DashboardOverview />} />
         <Route path="app-builder" element={<AppBuilder />} />
         <Route path="users" element={<UserManagement />} />
         <Route path="events" element={<EventManagement />} />
@@ -67,10 +70,12 @@ export default function App() {
         <Route path="support" element={<CustomerSupport />} />
         <Route path="analytics" element={<AnalyticsReports />} />
         <Route path="legal" element={<LegalDocuments />} />
-        <Route path="admin-accounts" element={<AdminAccounts />} />
+        <Route path="administrators" element={<AdminAccounts />} />
         <Route path="security" element={<SecurityLogs />} />
         <Route path="settings" element={<AppSettingsPage />} />
       </Route>
+
+      <Route path="*" element={<Navigate to="/admin/login" replace />} />
     </Routes>
   )
 }

@@ -26,7 +26,7 @@ export default function DashboardLayout() {
 
   const handleSignOut = async () => {
     await signOut()
-    navigate('/login')
+    navigate('/admin/login')
   }
 
   return (
